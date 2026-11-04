@@ -11,8 +11,6 @@ services:
     image: redis:8
     networks:
       - superdesk
-    ports:
-      - "6379:6379"
 
   elastic:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.29
