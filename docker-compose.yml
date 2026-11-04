@@ -31,11 +31,11 @@ services:
       - mongodb
       - elastic
     environment:
-      - SUPERDESK_URL=http://localhost:8080/api
+      - SUPERDESK_URL=https://superdesk.nascecom.com.br/api
       - DEMO_DATA=1 # install demo data, set to 0 if you want clean install
       - WEB_CONCURRENCY=2
-      - SUPERDESK_CLIENT_URL=http://localhost:8080
-      - CONTENTAPI_URL=http://localhost:8080/capi
+      - SUPERDESK_CLIENT_URL=https://superdesk.nascecom.com.br
+      - CONTENTAPI_URL=https://superdesk.nascecom.com.br/capi
       - MONGO_URI=mongodb://mongodb/superdesk
       - CONTENTAPI_MONGO_URI=mongodb://mongodb/superdesk_capi
       - PUBLICAPI_MONGO_URI=mongodb://mongodb/superdesk_papi
@@ -58,10 +58,12 @@ services:
       context: ./client
       dockerfile: Dockerfile
       args:
-        - SUPERDESK_URL=http://localhost:8080/api
-        - SUPERDESK_WS_URL=ws://localhost:8080/ws
+        - SUPERDESK_URL=https://superdesk.nascecom.com.br/api
+        - SUPERDESK_WS_URL=wss://superdesk.nascecom.com.br/ws
     environment:
       # If not hosting on localhost, change these lines
+      - SUPERDESK_URL=https://superdesk.nascecom.com.br/api
+      - SUPERDESK_WS_URL=wss://superdesk.nascecom.com.br/ws
       - IFRAMELY_KEY
     ports:
       - "8081:80"
