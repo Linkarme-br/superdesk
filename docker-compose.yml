@@ -64,7 +64,7 @@ services:
       # If not hosting on localhost, change these lines
       - IFRAMELY_KEY
     ports:
-      - "8080:80"
+      - "8081:80"
     networks:
       - superdesk
 
