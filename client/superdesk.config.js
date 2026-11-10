@@ -6,35 +6,13 @@
  */
 module.exports = function() {
     return {
-        apps: [
-            'superdesk-publisher',
-            'superdesk-planning',
-            'superdesk.analytics',
-        ],
+        apps: [],
         importApps: [
             '../index',
-            'superdesk-publisher',
-            'superdesk-planning',
-            'superdesk-analytics',
         ],
 
         defaultRoute: '/workspace/monitoring',
 
-        publisher: {
-            protocol: 'https',                /* http or https */
-            tenant: '',              /* tenant - semantically subdomain, '' is allowed */
-            domain: 'sp-publisher.superdesk.pro',           /* domain name for the publisher */
-            base: 'api/v2',                  /* api base path */
-
-            wsProtocol: 'wss',                /* ws or wss (websocket); if unspecified or '' defaults to 'wss' */
-            wsDomain: 'sp-publisher.superdesk.pro',  /* domain name (usually domain as above) */
-                                            /* e.g.: example.com, abc.example.com */
-                                            /* tenant, as above, is NOT used for websocket */
-            wsPath: '/ws',                    /* path to websocket root dir */
-            wsPort: '80',                   /* if not specified: defaults to 443 for wss, 80 for ws */
-            hideContentRoutesInPublishPane: false, /* hides routes of type "content" from select box in publish panes in monitoring view as well as in output control. If not specified: defaults to false */
-            hideCustomRoutesInPublishPane: false   /* hides routes of type "custom" from select box in publish panes in monitoring view as well as in output control. If not specified: defaults to false */
-        },
 
         langOverride: {
             en: {
@@ -42,6 +20,26 @@ module.exports = function() {
                 'ANPA CATEGORY': 'CATEGORY',
                 'multi-line quote': 'pullquote',
                 'Multi-line quote': 'Pullquote',
+            },
+            pt_BR: {
+                'Fetch': 'Trazer para edição',
+                'Fetch To': 'Trazer para',
+                'Fetch to': 'Trazer para',
+                'Fetch Content To a Desk': 'Trazer conteúdo para uma mesa',
+                'Fetched': 'Na mesa',
+                'fetched': 'trazido para a mesa',
+                'Ingested': 'Recebido',
+                'ingested': 'recebido',
+            },
+            pt: {
+                'Fetch': 'Trazer para edição',
+                'Fetch To': 'Trazer para',
+                'Fetch to': 'Trazer para',
+                'Fetch Content To a Desk': 'Trazer conteúdo para uma mesa',
+                'Fetched': 'Na mesa',
+                'fetched': 'trazido para a mesa',
+                'Ingested': 'Recebido',
+                'ingested': 'recebido',
             }
         },
 
@@ -85,18 +83,18 @@ module.exports = function() {
             editFeaturedImage: true,
             searchShortcut: true,
             elasticHighlight: true,
-            planning: true,
+            planning: false,
             autorefreshContent: true,
             nestedItemsInOutputStage: false,
-            planning: true,
+            planning: false,
         },
 
         item_profile: { change_profile: 1 },
 
         workspace: {
-            planning: true,
-            assignments: true,
-            analytics: true,
+            planning: false,
+            assignments: false,
+            analytics: false,
         },
 
         ui: {

@@ -3,30 +3,6 @@ import {startApp} from 'superdesk-core/scripts/index';
 setTimeout(() => {
     startApp(
         [
-            // Always-on / manually-managed extensions. Entries with custom load
-            // logic (.then, setCustomizations) live here so scripts/dev/extension.sh
-            // can manipulate the standard-template region below without worrying
-            // about them.
-            {
-                id: 'planning-extension',
-                load: () => import('superdesk-planning/client/planning-extension'),
-            },
-            {
-                id: 'broadcasting',
-                load: () => import('superdesk-core/scripts/extensions/broadcasting').then((broadcasting) => {
-                    broadcasting.setCustomizations({
-                        getRundownItemDisplayName: (rundown) => rundown.technical_title,
-                    });
-
-                    return broadcasting;
-                }),
-            },
-
-            // extensions:start (managed by scripts/dev/extension.sh — do not edit by hand)
-            {
-                id: 'annotationsLibrary',
-                load: () => import('superdesk-core/scripts/extensions/annotationsLibrary'),
-            },
             {
                 id: 'markForUser',
                 load: () => import('superdesk-core/scripts/extensions/markForUser'),
@@ -35,11 +11,6 @@ setTimeout(() => {
                 id: 'datetimeField',
                 load: () => import('superdesk-core/scripts/extensions/datetimeField'),
             },
-            {
-                id: 'availability-manager',
-                load: () => import('superdesk-core/scripts/extensions/availability-manager'),
-            },
-            // extensions:end
         ],
         {},
     );

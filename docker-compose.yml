@@ -4,8 +4,8 @@ services:
     image: mongo:6
     networks:
       - superdesk
-    ports:
-      - "27017:27017"
+    # Do not publish 27017 publicly — Mongo without auth gets wiped by scanners.
+    restart: unless-stopped
 
   redis:
     image: redis:8
@@ -16,10 +16,17 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.29
     environment:
       - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1536m
     networks:
       - superdesk
-    ports:
-      - "9200:9200"
+    # Do not publish 9200 publicly.
+    restart: unless-stopped
 
   superdesk-server:
     image: sourcefabricoss/superdesk-server:latest
@@ -30,7 +37,7 @@ services:
       - elastic
     environment:
       - SUPERDESK_URL=https://superdesk.nascecom.com.br/api
-      - DEMO_DATA=1 # install demo data, set to 0 if you want clean install
+      - DEMO_DATA=0 # install demo data, set to 0 if you want clean install
       - WEB_CONCURRENCY=2
       - SUPERDESK_CLIENT_URL=https://superdesk.nascecom.com.br
       - CONTENTAPI_URL=https://superdesk.nascecom.com.br/capi
